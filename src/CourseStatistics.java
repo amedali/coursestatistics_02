@@ -1,4 +1,4 @@
-import java.util.*; // for Scanner
+import java.util.*;
 
 public class CourseStatistics {
 
@@ -8,23 +8,18 @@ public class CourseStatistics {
     public static double exam1Weight;
     public static double exam2Weight;
     public static double assignmentWeight;
-    public static double exam1Score;
-    public static double exam2Score;
-    public static double assignmentScore;
-    public static double totalAssignmentScore;
-    public static double courseGrade;
     public static double totalCourseGrade;
     public static double[] arrayOfCourseGrades;
 
     public static void main(String[] args) {
 
-        courseInformation();
+        courseInfo();
         studentInfo();
         courseStatistics();
 
     }
 
-    public static void courseInformation() {
+    public static void courseInfo() {
 
         System.out.println("Course Information:");
 
@@ -51,6 +46,11 @@ public class CourseStatistics {
 
         for(int i = 1; i <= numberOfStudents; i++) {
 
+            double exam1Score;
+            double exam2Score;
+            double totalAssignmentScore = 0;
+            double courseGrade;
+
             System.out.println("Student " + i + " scores:");
 
             System.out.print("Exam 1 score: ");
@@ -59,10 +59,11 @@ public class CourseStatistics {
             System.out.print("Exam 2 score: ");
             exam2Score = console.nextDouble();
 
-            for(int ii = 1; ii <= numberOfAssignments; ii++) {
+            for(int j = 1; j <= numberOfAssignments; j++) {
 
-                System.out.print("Assignment " + ii + " score: ");
-                assignmentScore = console.nextDouble();
+                System.out.print("Assignment " + j + " score: ");
+                double assignmentScore = console.nextDouble();
+
                 totalAssignmentScore = totalAssignmentScore + assignmentScore;
             }
 
@@ -72,11 +73,9 @@ public class CourseStatistics {
 
             totalCourseGrade = totalCourseGrade + courseGrade;
 
-            int iii = i - 1;
+            arrayOfCourseGrades[i - 1] = courseGrade;
 
-            arrayOfCourseGrades[iii] = courseGrade;
-
-            System.out.println("Course grade = " + String.format("%.2f", courseGrade));
+            System.out.printf("Course grade = %.2f\n", courseGrade);
 
         System.out.println(" ");
 
@@ -89,9 +88,9 @@ public class CourseStatistics {
         double courseMax = Arrays.stream(arrayOfCourseGrades).max().getAsDouble();
         double courseMin = Arrays.stream(arrayOfCourseGrades).min().getAsDouble();
 
-        System.out.println("Average course grade = " + String.format("%.2f", courseAvg));
-        System.out.println("Maximum course grade = " + String.format("%.2f", courseMax));
-        System.out.println("Minimum course grade = " + String.format("%.2f", courseMin));
+        System.out.printf("Average course grade = %.2f\n", courseAvg);
+        System.out.printf("Maximum course grade = %.2f\n", courseMax);
+        System.out.printf("Minimum course grade = %.2f\n", courseMin);
 
     }
 }
